@@ -5,6 +5,7 @@ import { User } from "lucide-react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { LoginButton } from "@/components/auth/login-button";
 
 const Navbar = () => {
   return (
@@ -24,10 +25,12 @@ const Navbar = () => {
       </ul>
 
       <div className="lg:flex lg:items-center lg:justify-center hidden">
-        <Button>
-          <User className="h-4 w-4 mr-2" />
-          Login
-        </Button>
+        <LoginButton>
+          <Button>
+            <User className="h-4 w-4 mr-2" />
+            Login
+          </Button>
+        </LoginButton>
       </div>
 
       <Menu
