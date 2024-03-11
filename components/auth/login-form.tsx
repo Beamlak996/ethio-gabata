@@ -21,6 +21,7 @@ import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { login } from "@/actions/login";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -97,6 +98,11 @@ export const LoginForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
+                  <Button variant="link" size="sm" asChild className="px-0 font-normal" >
+                    <Link href="/auth/reset" >
+                      Forgot password?
+                    </Link>
+                  </Button>
                 </FormItem>
               )}
             />
