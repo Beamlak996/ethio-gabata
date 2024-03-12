@@ -12,7 +12,7 @@ export async function sendVerificationEmail(toEmail: string, token: string) {
     },
   });
 
-  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
+  const confirmLink = `https://ethio-gabata.vercel.app/auth/new-verification?token=${token}`;
 
   var mailOptions = {
     from: process.env.EMAIL,
@@ -45,7 +45,7 @@ export async function sendPasswordResetEmail(toEmail: string, token: string) {
     },
   });
 
-  const resetLink = `${domain}/auth/new-password?token=${token}`;
+  const resetLink = `https://ethio-gabata.vercel.app/auth/new-password?token=${token}`;
 
   var mailOptions = {
     from: process.env.EMAIL,
