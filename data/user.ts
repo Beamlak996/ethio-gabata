@@ -35,3 +35,16 @@ export const getAllUsers = async () => {
     return null;
   }
 };
+
+export const getAllInvitedUsers = async (id: string) => {
+  try {
+    const users = await db.user.findMany({
+      where: {
+        referalId: id,
+      },
+    });
+    return users
+  } catch (error) {
+    return null
+  }
+}

@@ -66,13 +66,13 @@ export const InviteModal= ({children}: InviteModalProps) => {
             )}
           </Button>
         </div>
-        <DialogFooter className="sm:justify-start">
+        {/* <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Close
             </Button>
           </DialogClose>
-        </DialogFooter>
+        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   );

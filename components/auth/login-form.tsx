@@ -35,6 +35,8 @@ export const LoginForm = () => {
       ? "Email already in use with different provider!"
       : "";
 
+  const callbackUrl = searchParams.get("callbackUrl");
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -48,7 +50,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      login(values).then((data) => {
+      login(values, callbackUrl).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
@@ -98,10 +100,13 @@ export const LoginForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                  <Button variant="link" size="sm" asChild className="px-0 font-normal" >
-                    <Link href="/auth/reset" >
-                      Forgot password?
-                    </Link>
+                  <Button
+                    variant="link"
+                    size="sm"
+                    asChild
+                    className="px-0 font-normal"
+                  >
+                    <Link href="/auth/reset">Forgot password?</Link>
                   </Button>
                 </FormItem>
               )}

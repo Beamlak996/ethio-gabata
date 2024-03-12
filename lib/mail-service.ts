@@ -1,5 +1,7 @@
 var nodemailer = require("nodemailer");
 
+const domain = process.env.NEXT_PUBLIC_APP_URL;
+
 export async function sendVerificationEmail(toEmail: string, token: string) {
   var transporter = nodemailer.createTransport({
     service: "gmail",
@@ -10,7 +12,7 @@ export async function sendVerificationEmail(toEmail: string, token: string) {
     },
   });
 
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `${domain}/auth/new-verification?token=${token}`;
 
   var mailOptions = {
     from: process.env.EMAIL,
@@ -43,7 +45,7 @@ export async function sendPasswordResetEmail(toEmail: string, token: string) {
     },
   });
 
-  const resetLink = `http://localhost:3000/auth/new-password?token=${token}`;
+  const resetLink = `${domain}/auth/new-password?token=${token}`;
 
   var mailOptions = {
     from: process.env.EMAIL,

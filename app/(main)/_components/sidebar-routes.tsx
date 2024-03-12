@@ -13,28 +13,7 @@ import { InviteModal } from "@/components/modal/invite-modal";
 
 
 
-const userRoutes = [
-  {
-    icon: BarChart,
-    label: "Dashboard",
-    href: "/dashboard",
-  },
-  {
-    icon: Network,
-    label: "Network",
-    href: "/network",
-  },
-  {
-    icon: User,
-    label: "Profile",
-    href: "/profile",
-  },
-  {
-    icon: CircleDollarSign,
-    label: "Upgrade package",
-    href: "/billing",
-  },
-];
+
 
 const adminRoutes = [
   {
@@ -52,6 +31,29 @@ const adminRoutes = [
 export const SidebarRoutes = () => {
   const userRole = useCurrentRole()
   const user = useCurrentUser()
+
+  const userRoutes = [
+    {
+      icon: BarChart,
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      icon: Network,
+      label: "Network",
+      href: "/network",
+    },
+    {
+      icon: User,
+      label: "Profile",
+      href: `/user/${user?.id}`,
+    },
+    {
+      icon: CircleDollarSign,
+      label: "Upgrade package",
+      href: "/billing",
+    },
+  ];
 
   const isAdminPage = userRole === UserRole.ADMIN ? true : false
 
