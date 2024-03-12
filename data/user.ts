@@ -29,7 +29,11 @@ export const getUserById = async (id: string) => {
 
 export const getAllUsers = async () => {
   try {
-    const users = await db.user.findMany();
+    const users = await db.user.findMany({
+      where: {
+        role: UserRole.USER,
+      },
+    });
     return users;
   } catch (error) {
     return null;
@@ -43,8 +47,18 @@ export const getAllInvitedUsers = async (id: string) => {
         referalId: id,
       },
     });
-    return users
+    return users;
+  } catch (error) {
+    return null;
+  }
+};
+
+
+export const getTotalInvitedUsers = async (id: string) => {
+  try {
+    const invitedUsers = await getAllInvitedUsers(id)
+    return invitedUsers?.length
   } catch (error) {
     return null
   }
-}
+}  

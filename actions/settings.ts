@@ -4,14 +4,14 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { db } from "@/lib/db";
-import { ProfileSchema } from "@/schemas";
+import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/lib/auths";
 import { generateVerificationToken } from "@/lib/token";
 import { sendVerificationEmail } from "@/lib/mail-service";
 
 
-export const profile = async (values: z.infer<typeof ProfileSchema>) => {
+export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   const user = await currentUser();
 
   if (!user || !user.id) {
@@ -62,7 +62,7 @@ export const profile = async (values: z.infer<typeof ProfileSchema>) => {
     values.newPassword = undefined;
   }
 
-  const updatedUser = await db.user.update({
+  await db.user.update({
     where: { id: dbUser.id },
     data: {
       ...values,

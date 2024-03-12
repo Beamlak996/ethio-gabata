@@ -1,7 +1,14 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, ShieldAlert, MoreHorizontal, Pencil } from "lucide-react";
+import {
+  ArrowUpDown,
+  ShieldAlert,
+  MoreHorizontal,
+  Pencil,
+  ListCollapse,
+  Trash,
+} from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -14,14 +21,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@prisma/client";
-
+import { ChangeRoleModal } from "@/components/modal/change-role-modal";
+import { deleteUser } from "@/actions/delete";
 
 export type UsersColumns = {
-    id: string
-    name: string
-    email: string
-    role: string
-}
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+};
 
 export const columns: ColumnDef<UsersColumns>[] = [
   {
@@ -52,34 +60,40 @@ export const columns: ColumnDef<UsersColumns>[] = [
       );
     },
   },
-    {
-      accessorKey: "role",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Role
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
-      },
-      cell: ({ row }) => {
-        const isAdmin = row.getValue("role") === UserRole.ADMIN ? true : false
-
-        return (
-          <Badge className={cn("bg-emerald-500 hover:bg-emerald-500", isAdmin && "bg-rose-500 hover:bg-rose-500")}>
-            {isAdmin ? "Admin" : "User"}
-          </Badge>
-        );
-      },
+  {
+    accessorKey: "role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Role
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
     },
+    cell: ({ row }) => {
+      const isAdmin = row.getValue("role") === UserRole.ADMIN ? true : false;
+
+      return (
+        <Badge
+          className={cn(
+            "bg-emerald-500 hover:bg-emerald-500",
+            isAdmin && "bg-rose-500 hover:bg-rose-500"
+          )}
+        >
+          {isAdmin ? "Admin" : "User"}
+        </Badge>
+      );
+    },
+  },
   {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
       const { id } = row.original;
+      const role = row.getValue("role");
 
       return (
         <DropdownMenu>
@@ -89,11 +103,14 @@ export const columns: ColumnDef<UsersColumns>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <Link href={`/`}>
+          <DropdownMenuContent
+            align="end"
+            className="flex flex-col w-full px-0"
+          >
+            <Link href={`/user/${id}`}>
               <DropdownMenuItem>
-                <ShieldAlert className="h-4 w-4 mr-2" />
-                Change Role
+                <ListCollapse className="h-4 w-4 mr-2" />
+                Details
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>

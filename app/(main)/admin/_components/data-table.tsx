@@ -66,12 +66,12 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Link href="/teacher/create">
+        {/* <Link href="/teacher/create">
           <Button variant="success" >
             <PlusCircle className="h-4 w-4 mr-2" />
             New user
           </Button>
-        </Link>
+        </Link> */}
       </div>
       <div className="rounded-md border">
         <Table>

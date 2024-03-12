@@ -2,8 +2,9 @@ import { currentRole, currentUser } from "@/lib/auths";
 import { Chart } from "../_components/charts";
 import { DataCard } from "../_components/data-card";
 import { UserRole } from "@prisma/client";
-import { getAllUsers } from "@/data/user";
+import { getAllInvitedUsers, getAllUsers } from "@/data/user";
 import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
 
 
 const graphData = [
@@ -23,10 +24,19 @@ const graphData = [
 
 const DashboardPage = async () => {
   const userRole = await  currentRole()
+  const user = await currentUser()
   let userNumber = 0
+
+  if(!user || !user.id) {
+    return redirect('/')
+  }
 
   if(userRole == UserRole.ADMIN) {
     userNumber = await db.user.count()
+  } else {
+     const invitedUsers = await getAllInvitedUsers(user?.id)
+    //  @ts-ignore
+     userNumber = invitedUsers?.length
   }
 
   return (
