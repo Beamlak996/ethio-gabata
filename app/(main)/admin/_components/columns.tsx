@@ -21,8 +21,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@prisma/client";
-import { ChangeRoleModal } from "@/components/modal/change-role-modal";
-import { deleteUser } from "@/actions/delete";
 
 export type UsersColumns = {
   id: string;
