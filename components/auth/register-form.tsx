@@ -13,8 +13,13 @@ import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { register } from "@/actions/register";
+import { useSearchParams } from "next/navigation";
 
 export const RegisterForm = () => {
+  const searchParams = useSearchParams()
+
+  const token = searchParams.get("invite-code");
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
@@ -25,7 +30,7 @@ export const RegisterForm = () => {
     defaultValues: {
       email: "",
       password: "",
-      name: ""
+      name: "",
     },
   });
 
@@ -34,7 +39,7 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
+      register(values, token).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
@@ -104,6 +109,24 @@ export const RegisterForm = () => {
                 </FormItem>
               )}
             />
+            {/* <FormField
+              control={form.control}
+              name="token"
+              render={({ field }) => (
+                <FormItem className="hidden">
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isPending}
+                      {...field}
+                      placeholder="******"
+                      type="password"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />

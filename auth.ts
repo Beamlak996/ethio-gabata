@@ -44,6 +44,7 @@ export const {
 
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
+        session.user.inviteCode = token.inviteCode as string
       }
 
       return session;
@@ -56,6 +57,7 @@ export const {
       if (!existingUser) return token;
 
       token.role = existingUser.role;
+      token.inviteCode = existingUser.inviteCode
 
       return token;
     },
