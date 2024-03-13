@@ -1,3 +1,4 @@
+"use client"
 import { Ellipsis } from "lucide-react";
 import { Button } from "./ui/button";
 import {
@@ -7,12 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { PackageActions } from "@/app/(main)/admin/_components/package-actions";
 
 type PackageCardProps = {
   id: string;
   title: string;
   price: number;
   description: string;
+  commission?: number;
 };
 
 export const PackageCard = ({
@@ -20,26 +23,22 @@ export const PackageCard = ({
   title,
   price,
   description,
+  commission,
 }: PackageCardProps) => {
-  
-
   return (
     <Card className="w-[300px]">
       <CardHeader>
-        <CardTitle>Title</CardTitle>
-        <Button variant="secondary">
-          <Ellipsis className="h-4 w-4" />
-        </Button>
+        <div className="flex flex-row justify-between items-center" >
+          <CardTitle>{title}</CardTitle>
+          <PackageActions id={id} />
+        </div>
       </CardHeader>
       <CardContent>
-        <div className="w-full">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos,
-          explicabo!
-        </div>
+        <div className="w-full">{description}</div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <div>Price</div>
-        <div>commision</div>
+        <div>{price}</div>
+        <div>{commission}</div>
       </CardFooter>
     </Card>
   );

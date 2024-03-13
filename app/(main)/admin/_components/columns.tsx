@@ -110,7 +110,7 @@ export const columns: ColumnDef<UsersColumns>[] = [
                 <ListCollapse className="h-4 w-4 mr-2" />
                 Details
               </DropdownMenuItem>
-            </Link>
+            </Link>y
           </DropdownMenuContent>
         </DropdownMenu>
       );

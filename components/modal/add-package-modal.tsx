@@ -1,10 +1,11 @@
 "use client";
 
 import * as z from "zod";
+import { useState, useTransition } from "react";
 
-import usePackageModal from "@/hooks/use-package-modal";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -15,15 +16,25 @@ import { AddPackageSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { useTransition } from "react";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { addPackage } from "@/actions/add-package";
+import { FormError } from "../form-error";
+import { RefreshCcw } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FormSuccess } from "../form-success";
+import usePackageModal from "@/hooks/use-package-modal";
 
 export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const {isOpen, onClose} = usePackageModal()
+
   const [isPending, startTransition] = useTransition();
 
-  const packageModal = usePackageModal();
+  const router = useRouter()
+
 
   const form = useForm<z.infer<typeof AddPackageSchema>>({
     resolver: zodResolver(AddPackageSchema),
@@ -37,16 +48,26 @@ export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
 
 
 
-  const onSubmit = (values: z.infer<typeof AddPackageSchema>) => {
+  const onSubmit = async (values: z.infer<typeof AddPackageSchema>) => {
+    setError("")
+
     startTransition(()=> {
-        
+         addPackage(values).then((data)=> {
+            setError(data.error)
+            // if(success) {
+            //     // setOpen()
+            // }
+        })
     })
+    
   };
+
+  
 
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-425px">
+      <DialogContent className="sm:max-w-425px z-[50]" >
         <DialogHeader>
           <DialogTitle>Add Package</DialogTitle>
           <DialogDescription>
@@ -100,8 +121,8 @@ export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
                       <Input
                         disabled={isPending}
                         {...field}
-                        placeholder="2000"
                         type="number"
+                        placeholder="2000"
                       />
                     </FormControl>
                     <FormMessage />
@@ -127,9 +148,21 @@ export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
                 )}
               />
             </div>
-            <Button type="submit" className="w-full" variant="success" >
-                Add
-            </Button>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+              <Button
+                type="submit"
+                className="w-full"
+                variant="success"
+                disabled={isPending}
+
+              >
+                {isPending ? (
+                  <RefreshCcw className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Add"
+                )}
+              </Button>
           </form>
         </Form>
       </DialogContent>
