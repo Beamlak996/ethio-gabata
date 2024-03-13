@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Network, User, Users, CircleDollarSign } from "lucide-react";
+import { BarChart, Network, User, Users, CircleDollarSign, Package } from "lucide-react";
 
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
@@ -25,6 +25,11 @@ const adminRoutes = [
     icon: Users,
     label: "Total Users",
     href: "/admin/users",
+  },
+  {
+    icon: Package,
+    label: "Packages",
+    href: "/admin/packages",
   },
 ];
 

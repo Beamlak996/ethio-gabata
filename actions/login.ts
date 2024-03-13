@@ -9,7 +9,7 @@ import { getUserByEmail } from "@/data/user";
 import { generateVerificationToken } from "@/lib/token";
 import { sendVerificationEmail } from "@/lib/mail-service";
 
-export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: string) => {
+export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -41,7 +41,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
   } catch (error) {
     if (error instanceof AuthError) {
@@ -52,6 +52,7 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
           return { error: "Something went wrong!" };
       }
     }
+
     throw error;
   }
 };

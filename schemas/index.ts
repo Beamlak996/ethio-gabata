@@ -45,3 +45,16 @@ export const SettingsSchema = z.object({
   role: z.enum([UserRole.ADMIN, UserRole.USER]),
 });
 
+
+export const AddPackageSchema = z.object({
+  title: z.string().min(1, {
+    message: "Package must have a title."
+  }),
+  description: z.string().min(1, {
+    message: "Please add a package description."
+  }),
+  price: z.number().min(1, {
+    message: "Please add the price of the package"
+  }),
+  commission: z.optional(z.number())
+})
