@@ -15,25 +15,28 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 type PackageActionsProps = {
-  id: string
-}
+  id: string;
+};
 
-export const PackageActions = ({id}: PackageActionsProps) => {
-  const [open, setOpen] = useState(false)
+export const PackageActions = ({ id }: PackageActionsProps) => {
+  const [open, setOpen] = useState(false);
+
+  const [editOpen, setEditOpen] = useState(false);
+
   const [isPending, startTransition] = useTransition();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onConfirm = async () => {
-    startTransition(()=> {
-      deletePackage(id).then((data)=> {
-        if(data.success) {
-          setOpen(false)
-          router.refresh()
+    startTransition(() => {
+      deletePackage(id).then((data) => {
+        if (data.success) {
+          setOpen(false);
+          router.refresh();
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   return (
     <>
@@ -52,8 +55,13 @@ export const PackageActions = ({id}: PackageActionsProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem>
-            <Edit className="mr-2 h-4 w-4" /> Update
+          <DropdownMenuItem
+            onClick={() => router.push(`/admin/packages/${id}`)}
+          >
+            <Edit
+              className="mr-2 h-4 w-4"
+            />{" "}
+            Update
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Delete

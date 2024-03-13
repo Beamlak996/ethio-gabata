@@ -58,3 +58,17 @@ export const AddPackageSchema = z.object({
   }),
   commission: z.optional(z.coerce.number()),
 });
+
+export const EditPackageSchema = z.object({
+  id: z.string(),
+  title: z.string().min(1, {
+    message: "Package must have a title.",
+  }),
+  description: z.string().min(1, {
+    message: "Please add a package description.",
+  }),
+  price: z.coerce.number().min(1, {
+    message: "Please add the price of the package",
+  }),
+  commission: z.optional(z.coerce.number()),
+});

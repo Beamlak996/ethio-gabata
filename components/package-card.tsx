@@ -1,6 +1,5 @@
-"use client"
-import { Ellipsis } from "lucide-react";
-import { Button } from "./ui/button";
+"use client";
+import { Package } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -28,9 +27,11 @@ export const PackageCard = ({
   return (
     <Card className="w-[300px]">
       <CardHeader>
-        <div className="flex flex-row justify-between items-center" >
+        <div className="flex flex-row justify-between items-center">
           <CardTitle>{title}</CardTitle>
-          <PackageActions id={id} />
+          <PackageActions
+            id={id}
+          />
         </div>
       </CardHeader>
       <CardContent>
