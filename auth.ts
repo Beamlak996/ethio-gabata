@@ -56,6 +56,7 @@ export const {
         session.user.name = token.name;
         session.user.email = token.email as string;
         session.user.isOAuth = token.isOAuth as boolean;
+        session.user.commission = token.commission || 0
       }
 
       return session;
@@ -75,6 +76,7 @@ export const {
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
       token.inviteCode = existingUser.inviteCode;
+      token.commission = existingUser.commission
 
       return token;
     },

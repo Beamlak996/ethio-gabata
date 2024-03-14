@@ -3,7 +3,7 @@
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import { Package, User } from "@prisma/client";
+import { Package } from "@prisma/client";
 import { Pencil } from "lucide-react";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -41,7 +41,7 @@ export const PaidStatusForm = ({ user, items }: PaidStatusForm) => {
   const form = useForm<z.infer<typeof ChangePaidStatusSchema>>({
     resolver: zodResolver(ChangePaidStatusSchema),
     defaultValues: {
-      id: "",
+      id: user.packageId || "",
     },
   });
 
@@ -111,7 +111,7 @@ export const PaidStatusForm = ({ user, items }: PaidStatusForm) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" variant="success" >
+            <Button type="submit" variant="success" disabled={isPending} >
                 Save
             </Button>            
           </form>

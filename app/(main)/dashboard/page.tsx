@@ -25,6 +25,7 @@ const DashboardPage = async () => {
   const userRole = await currentRole();
   const user = await currentUser();
   let userNumber = 0;
+  let paidUsers = 0
 
   if (!user || !user.id) {
     return redirect("/");
@@ -38,9 +39,10 @@ const DashboardPage = async () => {
     userNumber = invitedUsers?.length;
   }
 
+
   return (
     <div className="p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <DataCard
           label={`${
             userRole === UserRole.ADMIN ? "Total Users" : "Total Invited Users"
@@ -48,6 +50,7 @@ const DashboardPage = async () => {
           value={userNumber}
         />
         <DataCard label="Total Paid Users" value={0} />
+        <DataCard label="Total Commission" value={user.commission} />
       </div>
       <Chart data={graphData} />
     </div>

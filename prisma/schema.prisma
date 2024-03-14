@@ -26,6 +26,7 @@ model User {
   referalId          String? @db.ObjectId
   isPaid             Boolean @default(false)
   packageId          String?
+  commission         Float? @default(0)
 }
 
 model Account {

@@ -6,6 +6,7 @@ import { currentRole } from "@/lib/auths";
 import { UserRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { PaidStatusForm } from "../../_components/paid-status-form";
+import { CommissionFrom } from "../../_components/commision-form";
 
 type ChangeStatusProps = {
     params: {
@@ -33,6 +34,7 @@ const ChangeStatus = async ({params}: ChangeStatusProps) => {
       <Separator className="mt-4 mb-6" />
       <div className="">
         <PaidStatusForm items={packages} user={user} />
+        <CommissionFrom user={user} />
       </div>
     </div>
   );
