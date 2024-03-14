@@ -24,12 +24,10 @@ import { FormError } from "../form-error";
 import { RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormSuccess } from "../form-success";
-import usePackageModal from "@/hooks/use-package-modal";
 
 export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const {isOpen, onClose} = usePackageModal()
 
   const [isPending, startTransition] = useTransition();
 

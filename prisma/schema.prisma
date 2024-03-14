@@ -24,6 +24,8 @@ model User {
   isTwoFactorEnabled Boolean @default(false)
   inviteCode         String? @unique
   referalId          String? @db.ObjectId
+  isPaid             Boolean @default(false)
+  packageId          String?
 }
 
 model Account {

@@ -12,8 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Link from "next/link";
-import { PlusCircle } from "lucide-react";
+
 
 import {
   Table,
@@ -66,12 +65,6 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        {/* <Link href="/teacher/create">
-          <Button variant="success" >
-            <PlusCircle className="h-4 w-4 mr-2" />
-            New user
-          </Button>
-        </Link> */}
       </div>
       <div className="rounded-md border">
         <Table>

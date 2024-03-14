@@ -19,7 +19,7 @@ const TotalUsersPage = async () => {
     id: user.id,
     name: user.name,
     email: user.email,
-    role: user.role
+    isPaid: user.isPaid
   })); 
 
   return (

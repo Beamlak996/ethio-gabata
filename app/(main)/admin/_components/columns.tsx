@@ -8,6 +8,8 @@ import {
   Pencil,
   ListCollapse,
   Trash,
+  DollarSign,
+  FileBarChart,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -20,13 +22,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { UserRole } from "@prisma/client";
 
 export type UsersColumns = {
   id: string;
   name: string;
   email: string;
-  role: string;
+  isPaid: boolean;
 };
 
 export const columns: ColumnDef<UsersColumns>[] = [
@@ -59,29 +60,28 @@ export const columns: ColumnDef<UsersColumns>[] = [
     },
   },
   {
-    accessorKey: "role",
+    accessorKey: "isPaid",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Role
+          Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const isAdmin = row.getValue("role") === UserRole.ADMIN ? true : false;
+      const isPaid = row.getValue("isPaid")
 
       return (
         <Badge
           className={cn(
-            "bg-emerald-500 hover:bg-emerald-500",
-            isAdmin && "bg-rose-500 hover:bg-rose-500"
+            ""
           )}
         >
-          {isAdmin ? "Admin" : "User"}
+          {isPaid ? "Paid" : "Free"}
         </Badge>
       );
     },
@@ -91,7 +91,6 @@ export const columns: ColumnDef<UsersColumns>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const { id } = row.original;
-      const role = row.getValue("role");
 
       return (
         <DropdownMenu>
@@ -105,12 +104,18 @@ export const columns: ColumnDef<UsersColumns>[] = [
             align="end"
             className="flex flex-col w-full px-0"
           >
-            <Link href={`/user/${id}`}>
+            <Link href={`/admin/users/${id}`}>
               <DropdownMenuItem>
                 <ListCollapse className="h-4 w-4 mr-2" />
                 Details
               </DropdownMenuItem>
-            </Link>y
+            </Link>
+            <Link href={`/admin/users/${id}/change-status`}>
+              <DropdownMenuItem>
+                <FileBarChart className="h-4 w-4 mr-2" />
+                Change Status
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       );

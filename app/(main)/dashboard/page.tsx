@@ -48,7 +48,7 @@ const DashboardPage = async () => {
           value={userNumber}
         />
         <DataCard label="Total Paid Users" value={0} />
-m      </div>
+      </div>
       <Chart data={graphData} />
     </div>
   );

@@ -2,12 +2,10 @@
 import { Heading } from "@/components/heading";
 import { AddPackageModal } from "@/components/modal/add-package-modal";
 import { Button } from "@/components/ui/button";
-import usePackageModal from "@/hooks/use-package-modal";
 import { Plus } from "lucide-react";
 
 
 export const PackageHeader = () => {
-    const { onOpen } = usePackageModal()
 
     return (
       <div className="flex flex-row justify-between items-center">
