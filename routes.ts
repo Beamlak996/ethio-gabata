@@ -1,13 +1,8 @@
 import { UserRole } from "@prisma/client";
 import { currentRole } from "./lib/auths";
 
-async function userRole() {
-    const user = await currentRole()
-    if(user === UserRole.ADMIN) return "/main/admin/dashboard"
-    return "/main/dashboard"
-}
 
-export const publicRoutes = ["/", "/auth/new-verification"];
+export const publicRoutes = ["/"];
 
 export const authRoutes = [
   "/auth/login",
