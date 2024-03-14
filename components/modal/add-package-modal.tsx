@@ -50,6 +50,7 @@ export const AddPackageModal = ({children}: {children: React.ReactNode}) => {
 
   const onSubmit = async (values: z.infer<typeof AddPackageSchema>) => {
     setError("")
+    setSuccess("")
 
     startTransition(()=> {
          addPackage(values).then((data)=> {

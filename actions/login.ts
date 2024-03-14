@@ -24,18 +24,18 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { error: "Invalid credentials!" };
   }
 
-  if (!existingUser.emailVerified) {
-    const verificationToken = await generateVerificationToken(
-      existingUser.email
-    );
+  // if (!existingUser.emailVerified) {
+  //   const verificationToken = await generateVerificationToken(
+  //     existingUser.email
+  //   );
 
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
-    )
+  //   await sendVerificationEmail(
+  //     verificationToken.email,
+  //     verificationToken.token
+  //   )
 
-    return { success: "Confirmaiton email sent!" }
-  }
+  //   return { success: "Confirmaiton email sent!" }
+  // }
 
   try {
     await signIn("credentials", {

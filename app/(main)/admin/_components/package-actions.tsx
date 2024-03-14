@@ -10,7 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { useCurrentRole } from "@/hooks/use-current-role";
+import { UserRole } from "@prisma/client";
+import { Edit, Info, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -19,6 +21,8 @@ type PackageActionsProps = {
 };
 
 export const PackageActions = ({ id }: PackageActionsProps) => {
+  const userRole = useCurrentRole()
+
   const [open, setOpen] = useState(false);
 
   const [editOpen, setEditOpen] = useState(false);
@@ -55,17 +59,23 @@ export const PackageActions = ({ id }: PackageActionsProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem
-            onClick={() => router.push(`/admin/packages/${id}`)}
-          >
-            <Edit
-              className="mr-2 h-4 w-4"
-            />{" "}
-            Update
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
-          </DropdownMenuItem>
+          {userRole === UserRole.ADMIN ? (
+            <>
+              <DropdownMenuItem
+                onClick={() => router.push(`/admin/packages/${id}`)}
+              >
+                <Edit className="mr-2 h-4 w-4" /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setOpen(true)}>
+                <Trash className="mr-2 h-4 w-4" /> Delete
+              </DropdownMenuItem>
+            </>
+          ) : (
+            <DropdownMenuItem>
+              <Info className="mr-2 h-4 w-4" />
+              Info
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

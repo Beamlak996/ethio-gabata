@@ -9,6 +9,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { useState, useTransition } from "react"
+import { FormError } from "@/components/form-error"
+import { FormSuccess } from "@/components/form-success"
+import { editPackage } from "@/actions/edit-package"
 
 
 type EditPackageFormProps = {
@@ -16,6 +21,13 @@ type EditPackageFormProps = {
 }
 
 export const EditPackageForm = ({item}: EditPackageFormProps) => {
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
+
+    const [isPending, startTransition] = useTransition();
+
+    const router = useRouter()
+
     const form = useForm<z.infer<typeof EditPackageSchema>>({
       resolver: zodResolver(EditPackageSchema),
       defaultValues: {
@@ -27,10 +39,22 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
       },
     });
 
+    const id = item?.id || ""
+
+    const onSubmit = (values: z.infer<typeof EditPackageSchema>) => {
+        setError("")
+        setSuccess("")
+
+        startTransition(()=> {
+            editPackage(values, id)
+        })
+        router.refresh()
+    } 
+
     return (
       <div className="md:w-[800px] sm:w-[600px] w-[300px]">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(() => {})} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
               <FormField
                 control={form.control}
@@ -39,7 +63,7 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Basic" />
+                      <Input {...field} placeholder="Basic" disabled={isPending} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -55,6 +79,7 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
                       <Textarea
                         {...field}
                         placeholder="This package is good for buisness."
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -72,6 +97,7 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
                         {...field}
                         type="number"
                         placeholder="2000"
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -89,6 +115,7 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
                         {...field}
                         placeholder="500"
                         type="number"
+                        disabled={isPending}
                       />
                     </FormControl>
                     <FormMessage />
@@ -96,11 +123,13 @@ export const EditPackageForm = ({item}: EditPackageFormProps) => {
                 )}
               />
             </div>
+            <FormError message={error} />
+            <FormSuccess message={success} />
             <div className="w-full flex items-center justify-end gap-4 ml-auto" >
-                    <Button variant="secondary" >
+                    <Button variant="secondary" onClick={()=>router.back()} disabled={isPending} >
                         Back
                     </Button>
-                    <Button variant="success" >
+                    <Button variant="success" type="submit" disabled={isPending} >
                         Save
                     </Button>
             </div>

@@ -1,5 +1,4 @@
 "use client";
-import { Package } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -8,6 +7,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { PackageActions } from "@/app/(main)/admin/_components/package-actions";
+import { useCurrentRole } from "@/hooks/use-current-role";
 
 type PackageCardProps = {
   id: string;
@@ -24,14 +24,13 @@ export const PackageCard = ({
   description,
   commission,
 }: PackageCardProps) => {
+
   return (
     <Card className="w-[300px]">
       <CardHeader>
         <div className="flex flex-row justify-between items-center">
           <CardTitle>{title}</CardTitle>
-          <PackageActions
-            id={id}
-          />
+          <PackageActions id={id} />
         </div>
       </CardHeader>
       <CardContent>

@@ -70,6 +70,22 @@ model Package {
   price       Float
   commission  Float?
 
+  purchase Purchase[]
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   }
+
+  model Purchase {
+  id String          @id @default(auto()) @map("_id") @db.ObjectId
+  userId String      @db.ObjectId
+
+  packageId String   @db.ObjectId
+  package Package    @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@unique([userId, packageId])
+  @@index([packageId])
+}

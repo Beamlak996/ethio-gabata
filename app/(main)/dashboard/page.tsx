@@ -6,7 +6,6 @@ import { getAllInvitedUsers, getAllUsers } from "@/data/user";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
-
 const graphData = [
   { name: "Jan", total: 0 },
   { name: "Feb", total: 0 },
@@ -23,31 +22,36 @@ const graphData = [
 ];
 
 const DashboardPage = async () => {
-  const userRole = await  currentRole()
-  const user = await currentUser()
-  let userNumber = 0
+  const userRole = await currentRole();
+  const user = await currentUser();
+  let userNumber = 0;
 
-  if(!user || !user.id) {
-    return redirect('/')
+  if (!user || !user.id) {
+    return redirect("/");
   }
 
-  if(userRole == UserRole.ADMIN) {
-    userNumber = await db.user.count()
+  if (userRole == UserRole.ADMIN) {
+    userNumber = await db.user.count();
   } else {
-     const invitedUsers = await getAllInvitedUsers(user?.id)
+    const invitedUsers = await getAllInvitedUsers(user?.id);
     //  @ts-ignore
-     userNumber = invitedUsers?.length
+    userNumber = invitedUsers?.length;
   }
 
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <DataCard label="Total Users" value={userNumber} />
+        <DataCard
+          label={`${
+            userRole === UserRole.ADMIN ? "Total Users" : "Total Invited Users"
+          }`}
+          value={userNumber}
+        />
         <DataCard label="Total Paid Users" value={0} />
-      </div>
-      <Chart data={graphData}/>
+m      </div>
+      <Chart data={graphData} />
     </div>
   );
-}
+};
 
-export default DashboardPage
+export default DashboardPage;

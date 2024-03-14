@@ -56,7 +56,7 @@ export const SidebarRoutes = () => {
     {
       icon: CircleDollarSign,
       label: "Upgrade package",
-      href: "/billing",
+      href: "/packages",
     },
   ];
 
