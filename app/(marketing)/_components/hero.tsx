@@ -3,6 +3,9 @@ import Image from "next/image";
 import HeroImage from "../../../public/hero-image.jpg"
 import { Button } from "@/components/ui/button";
 
+const heroText =
+  "Ethio Gebeta isn't just another business partner; we're an extension of your team. We understand the unique needs of Ethiopian customers and go above and beyond to ensure their satisfaction. With our exceptional customer service and unwavering commitment to excellence, Ethio Gebeta is the clear choice for your business needs.";
+
 const Hero = () => {
   return (
     <section className="max-container px-6 lg:px-20 3xl:px-0 flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py-20 xl:flex-row">
@@ -20,11 +23,7 @@ const Hero = () => {
           Welcome to Ethio <span className="text-green-500">ገበታ</span>
         </h1>
         <p className="text-[16px] font-[400] leading-[120%] mt-6 text-gray-30 xl:max-w-[520px]">
-          Ethio Gebeta isn't just another business partner. We're an extension
-          of your team. We understand the unique needs of Ethiopian customers
-          and go above and beyond to ensure their satisfaction. With our
-          exceptional customer service and unwavering commitment to excellence,
-          Ethio Gebeta is the clear choice for your needs.
+          {heroText}
         </p>
 
         <div className="my-11 flex flex-wrap gap-5">
