@@ -17,12 +17,14 @@ const Hero = () => {
           className="absolute left-[-5px] top-[-30px] w-10 lg:w-[50px]"
         /> */}
         <h1 className="text-[52px] font-[700] leading-[120%] lg:text-[88px] lg:font-[700] lg:leading-[120%]">
-          Welcome to Ethio <span className="text-green-500">Gabata</span>
+          Welcome to Ethio <span className="text-green-500">ገበታ</span>
         </h1>
         <p className="text-[16px] font-[400] leading-[120%] mt-6 text-gray-30 xl:max-w-[520px]">
-          We want to be on each of your journeys seeking the satisfaction of
-          seeing the incorruptible beauty of nature. We can help you on an
-          adventure around the world in just one app
+          Ethio Gebeta isn't just another business partner. We're an extension
+          of your team. We understand the unique needs of Ethiopian customers
+          and go above and beyond to ensure their satisfaction. With our
+          exceptional customer service and unwavering commitment to excellence,
+          Ethio Gebeta is the clear choice for your needs.
         </p>
 
         <div className="my-11 flex flex-wrap gap-5">
@@ -85,11 +87,7 @@ const Hero = () => {
             </div>
           </div>
         </div> */}
-        <Image 
-          src={HeroImage}
-          alt=""
-          className="rounded-lg"
-        />
+        <Image src={HeroImage} alt="" className="rounded-lg" />
       </div>
     </section>
   );
