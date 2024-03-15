@@ -36,9 +36,9 @@ export const PackageCard = ({
       <CardContent>
         <div className="w-full">{description}</div>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <div>{price}</div>
-        <div>{commission}</div>
+      <CardFooter className="flex flex-col justify-center items-start">
+        <div>Price: {price} Birr</div>
+        <div>Commission: {commission} Birr</div>
       </CardFooter>
     </Card>
   );

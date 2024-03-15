@@ -2,6 +2,7 @@
 
 import { deletePackage } from "@/actions/delete-package";
 import { AlertModal } from "@/components/modal/alert-modal";
+import { InfoModal } from "@/components/modal/info-modal";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,7 +22,7 @@ type PackageActionsProps = {
 };
 
 export const PackageActions = ({ id }: PackageActionsProps) => {
-  const userRole = useCurrentRole()
+  const userRole = useCurrentRole();
 
   const [open, setOpen] = useState(false);
 
@@ -71,10 +72,12 @@ export const PackageActions = ({ id }: PackageActionsProps) => {
               </DropdownMenuItem>
             </>
           ) : (
-            <DropdownMenuItem>
-              <Info className="mr-2 h-4 w-4" />
-              Info
-            </DropdownMenuItem>
+            <InfoModal>
+              <Button variant="ghost" className="w-full text-start" size={"sm"} >
+                <Info className="mr-2 h-4 w-4" />
+                Info
+              </Button>
+            </InfoModal>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
