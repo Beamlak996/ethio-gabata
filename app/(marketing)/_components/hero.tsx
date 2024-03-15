@@ -1,7 +1,8 @@
 import Image from "next/image";
 // import Button from "./button";
-import HeroImage from "../../../public/hero-image.jpg"
+import HeroImage from "../../../public/hero-image.jpg";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const heroText =
   "Ethio Gebeta isn't just another business partner; we're an extension of your team. We understand the unique needs of Ethiopian customers and go above and beyond to ensure their satisfaction. With our exceptional customer service and unwavering commitment to excellence, Ethio Gebeta is the clear choice for your business needs.";
@@ -57,7 +58,9 @@ const Hero = () => {
             icon="/play.svg"
             variant="btn_white_text"
           /> */}
-          <Button>Get Started</Button>
+          <Link href={"/auth/register"}>
+            <Button>Get Started</Button>
+          </Link>
         </div>
       </div>
 
