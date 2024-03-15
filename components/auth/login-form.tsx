@@ -100,14 +100,14 @@ export const LoginForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                  <Button
+                  {/* <Button
                     variant="link"
                     size="sm"
                     asChild
                     className="px-0 font-normal"
                   >
                     <Link href="/auth/reset">Forgot password?</Link>
-                  </Button>
+                  </Button> */}
                 </FormItem>
               )}
             />

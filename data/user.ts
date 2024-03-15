@@ -62,3 +62,29 @@ export const getTotalInvitedUsers = async (id: string) => {
     return null
   }
 }  
+
+export const getTotalPaidUsers = async () => {
+  try {
+    const users = await getAllUsers();
+    const totalPaidUsers = users?.reduce(
+      (tot, user) => tot + (user.isPaid ? 1 : 0 || 0),
+      0
+    );
+    return totalPaidUsers;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getInvitedPaidUsers = async (id: string) => {
+  try {
+    const users = await getAllInvitedUsers(id)
+    const totalPaidUsers = users?.reduce(
+      (tot, user) => tot + (user.isPaid ? 1 : 0 || 0),
+      0
+    );
+    return totalPaidUsers;
+  } catch (error) {
+    return null
+  }
+} 
