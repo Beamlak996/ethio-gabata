@@ -7,6 +7,7 @@ import {
   ListCollapse,
   FileBarChart,
   FolderTree,
+  Trash,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -19,6 +20,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { AlertModal } from "@/components/modal/alert-modal";
+import { useState, useTransition } from "react";
+import { deleteUser } from "@/actions/delete";
+import { useRouter } from "next/navigation";
 
 export type UsersColumns = {
   id: string;
@@ -89,38 +94,66 @@ export const columns: ColumnDef<UsersColumns>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
 
+      const [open, setOpen] = useState(false)
+      const [isPending, startTransition] = useTransition();
+
+      const router = useRouter()
+
+      const onConfirm = async () => {
+        startTransition(()=> {
+          deleteUser(id).then(()=> {
+            setOpen(false)
+            router.refresh()
+          })
+        })
+      }
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="flex flex-col w-full px-0"
-          >
-            <Link href={`/admin/users/${id}`}>
+        <>
+          <AlertModal
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            onConfirm={onConfirm}
+            loading={isPending}
+          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-4 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="flex flex-col w-full px-0"
+            >
+              <Link href={`/admin/users/${id}`}>
+                <DropdownMenuItem>
+                  <ListCollapse className="h-4 w-4 mr-2" />
+                  Details
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/admin/users/${id}/change-status`}>
+                <DropdownMenuItem>
+                  <FileBarChart className="h-4 w-4 mr-2" />
+                  Change Status
+                </DropdownMenuItem>
+              </Link>
+              <Link href={`/admin/family/${id}`}>
+                <DropdownMenuItem>
+                  <FolderTree className="h-4 w-4 mr-2" />
+                  Family Tree
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
-                <ListCollapse className="h-4 w-4 mr-2" />
-                Details
+                <div className="flex flex-row" onClick={() => setOpen(true)}>
+                  <Trash className="h-4 w-4 mr-2" />
+                  Delete
+                </div>
               </DropdownMenuItem>
-            </Link>
-            <Link href={`/admin/users/${id}/change-status`}>
-              <DropdownMenuItem>
-                <FileBarChart className="h-4 w-4 mr-2" />
-                Change Status
-              </DropdownMenuItem>
-            </Link>
-            <Link href={`/admin/family/${id}`}>
-              <DropdownMenuItem>
-                <FolderTree className="h-4 w-4 mr-2" />
-                Family Tree
-              </DropdownMenuItem>
-            </Link>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       );
     },
   },

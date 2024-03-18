@@ -1,3 +1,4 @@
+"use server"
 import { getUserById } from "@/data/user";
 import { currentRole } from "@/lib/auths";
 import { db } from "@/lib/db";
