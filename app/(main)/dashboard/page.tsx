@@ -2,7 +2,7 @@ import { currentRole, currentUser } from "@/lib/auths";
 import { Chart } from "../_components/charts";
 import { DataCard } from "../_components/data-card";
 import { UserRole } from "@prisma/client";
-import {getAllInvitedUsers, getInvitedPaidUsers, getTotalPaidUsers } from "@/data/user";
+import {getAllInvitedPaidUsers, getAllInvitedUsers, getInvitedPaidUsers, getTotalPaidUsers } from "@/data/user";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { getTotalCommisionOwed } from "@/data/package";

@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
-import { User, UserRole } from "@prisma/client";
+import { User,  UserRole } from "@prisma/client";
+
 
 export const getUserByEmail = async (email: string) => {
   try {
@@ -90,22 +91,27 @@ export const getInvitedPaidUsers = async (id: string) => {
 
 
 
+
 async function getUsersByReferrer(
   referrerId: string,
   usersMap: Record<string, User[]>,
   users: User[]
 ) {
+  const referrer = await db.user.findUnique({ where: { id: referrerId } });
+
+  if (!referrer) return;
+
   const invitedUsers = await db.user.findMany({
     where: {
-      referalId: referrerId,
+      referalId: referrer.id,
     },
   });
 
   for (const user of invitedUsers) {
-    if (!usersMap[referrerId]) {
-      usersMap[referrerId] = [];
+    if (!usersMap[referrer.name || ""]) {
+      usersMap[referrer.name || ""] = [];
     }
-    usersMap[referrerId].push(user);
+    usersMap[referrer.name || ""].push(user);
 
     await getUsersByReferrer(user.id, usersMap, users); // Pass usersMap recursively
   }
@@ -122,6 +128,7 @@ export const getAllInvitedPaidUsers = async (id: string) => {
     return null;
   }
 };
+
 
 
 

@@ -7,6 +7,7 @@ import {
   Users,
   CircleDollarSign,
   Package,
+  FolderTree,
 } from "lucide-react";
 
 import { SidebarItem } from "./sidebar-item";
@@ -63,6 +64,11 @@ export const SidebarRoutes = () => {
       icon: CircleDollarSign,
       label: "Upgrade package",
       href: "/packages",
+    },
+    {
+      icon: FolderTree,
+      label: "Generate Family",
+      href: "/family",
     },
   ];
 
