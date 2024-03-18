@@ -104,6 +104,7 @@ async function getUsersByReferrer(
   const invitedUsers = await db.user.findMany({
     where: {
       referalId: referrer.id,
+      isPaid: true,
     },
   });
 

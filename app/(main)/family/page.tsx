@@ -4,7 +4,7 @@ import { currentUser } from "@/lib/auths"
 import { redirect } from "next/navigation"
 
 
-const MapPage = async () => {
+const FamilyPage = async () => {
   const currentuser = await currentUser()
 
   if(!currentUser) return redirect("/")
@@ -18,4 +18,4 @@ const MapPage = async () => {
   )
 }
 
-export default MapPage
+export default FamilyPage

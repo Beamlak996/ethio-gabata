@@ -10,6 +10,7 @@ import {
   Trash,
   DollarSign,
   FileBarChart,
+  FolderTree,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -114,6 +115,12 @@ export const columns: ColumnDef<UsersColumns>[] = [
               <DropdownMenuItem>
                 <FileBarChart className="h-4 w-4 mr-2" />
                 Change Status
+              </DropdownMenuItem>
+            </Link>
+            <Link href={`/admin/family/${id}`}>
+              <DropdownMenuItem>
+                <FolderTree className="h-4 w-4 mr-2" />
+                Family Tree
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>
