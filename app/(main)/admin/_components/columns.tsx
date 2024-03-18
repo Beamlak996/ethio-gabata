@@ -3,12 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowUpDown,
-  ShieldAlert,
   MoreHorizontal,
-  Pencil,
   ListCollapse,
-  Trash,
-  DollarSign,
   FileBarChart,
   FolderTree,
 } from "lucide-react";

@@ -14,6 +14,7 @@ export type UsersColumns = {
   name: string;
   email: string;
   role: string;
+  isPaid: boolean
 };
 
 export const columns: ColumnDef<UsersColumns>[] = [
@@ -46,31 +47,22 @@ export const columns: ColumnDef<UsersColumns>[] = [
     },
   },
   {
-    accessorKey: "role",
+    accessorKey: "isPaid",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Role
+          Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const isAdmin = row.getValue("role") === UserRole.ADMIN ? true : false;
+      const isPaid = row.getValue("isPaid");
 
-      return (
-        <Badge
-          className={cn(
-            "bg-emerald-500 hover:bg-emerald-500",
-            isAdmin && "bg-rose-500 hover:bg-rose-500"
-          )}
-        >
-          {isAdmin ? "Admin" : "User"}
-        </Badge>
-      );
+      return <Badge className={cn("")}>{isPaid ? "Paid" : "Free"}</Badge>;
     },
   },
   // {

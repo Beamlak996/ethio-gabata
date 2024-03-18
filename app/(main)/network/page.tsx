@@ -19,6 +19,7 @@ const NetworkPage = async () => {
     name: user.name,
     email: user.email,
     role: user.role,
+    isPaid: user.isPaid
   }));
 
   return (
