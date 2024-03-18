@@ -13,6 +13,8 @@ import { Pencil } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { payCommission } from "@/actions/pay-commison"
+import { FormError } from "@/components/form-error"
+import { FormSuccess } from "@/components/form-success"
 
 type CommissionFromProps = {
     user: any
@@ -23,6 +25,9 @@ export const CommissionFromSchema = z.object({
 })
 
 export const CommissionFrom = ({user}: CommissionFromProps) => {
+const [error, setError] = useState<string | undefined>("")
+const [success, setSuccess] = useState<string | undefined>("")
+
 const [isEditing, setIsEditing] = useState(false);
 
 const [isPending, startTransition] = useTransition();
@@ -39,8 +44,11 @@ const form = useForm<z.infer<typeof CommissionFromSchema>>({
 });
 
 const onSubmit = (values: z.infer<typeof CommissionFromSchema>) => {
+    setError("")
+    setSuccess("")
     startTransition(()=> {
         payCommission(values, user.id).then((data)=> {
+          setError(data.error)
           if(data.success) {
             setIsEditing(false)
             router.refresh()
@@ -93,6 +101,7 @@ const onSubmit = (values: z.infer<typeof CommissionFromSchema>) => {
                   </FormItem>
                 )}
               />
+              <FormError message={error} />
               <Button type="submit" variant="success" disabled={isPending} >
                 Pay
               </Button>

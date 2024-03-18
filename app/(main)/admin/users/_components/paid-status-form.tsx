@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { changePaidStatus } from "@/actions/change-paid-status";
 import { useRouter } from "next/navigation";
+import { FormError } from "@/components/form-error";
 
 type PaidStatusForm = {
   user: any;
@@ -30,6 +31,9 @@ export const ChangePaidStatusSchema = z.object({
 });
 
 export const PaidStatusForm = ({ user, items }: PaidStatusForm) => {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+
   const [isEditing, setIsEditing] = useState(false);
 
   const [isPending, startTransition] = useTransition();
@@ -46,8 +50,11 @@ export const PaidStatusForm = ({ user, items }: PaidStatusForm) => {
   });
 
   const onSubmit =  (values: z.infer<typeof ChangePaidStatusSchema>) => {
+    setError("")
+    setSuccess("")
     startTransition(()=> {
         changePaidStatus(values, user.id).then((data)=> {
+          setError(data.error)
           if(data.success) {
             setIsEditing(false)
             router.refresh()
@@ -111,6 +118,7 @@ export const PaidStatusForm = ({ user, items }: PaidStatusForm) => {
                 </FormItem>
               )}
             />
+            <FormError message={error} />
             <Button type="submit" variant="success" disabled={isPending} >
                 Save
             </Button>            
