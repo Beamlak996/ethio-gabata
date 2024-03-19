@@ -48,10 +48,11 @@ const adminRoutes = [
 export const SidebarRoutes = () => {
   const userRole = useCurrentRole();
   const user = useCurrentUser();
+  const { open } = useWithdrawModal();
+  const router = useRouter();
 
   if(!user) return redirect('/')
 
-  const router = useRouter();
 
   const userRoutes = [
     {
@@ -85,7 +86,7 @@ export const SidebarRoutes = () => {
 
   const routes = isAdminPage ? adminRoutes : userRoutes;
 
-  const { open } = useWithdrawModal();
+  
 
   return (
     <div className="flex flex-col w-full">
