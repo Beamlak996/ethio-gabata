@@ -22,7 +22,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session} >
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body className={`${inter.className} h-full`}  >
           <ModalProvider />
           {children}
         </body>

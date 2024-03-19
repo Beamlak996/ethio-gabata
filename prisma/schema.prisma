@@ -14,8 +14,12 @@ enum UserRole {
 
 model User {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  fullName           String?
   name               String? @unique
   email              String?   @unique
+  address            String?
+  phoneNumber        Int?
+  bankAccount        Int?
   emailVerified      DateTime?
   image              String?
   password           String? 
@@ -29,6 +33,7 @@ model User {
   commission         Float? @default(0)
   lat                Float?
   long               Float?
+  withdraw           Boolean? @default(false)
 }
 
 model Account {

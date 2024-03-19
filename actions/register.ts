@@ -16,7 +16,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
     return { error: "Invalid fields!" };
   }
 
-  const { name, email, password } = validatedFields.data
+  const { name, email, password, phoneNumber, address, bankAccount, fullName } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
   const existingName = await db.user.findUnique({
@@ -46,9 +46,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
     }) 
   }
 
-  const newUser = await db.user.create({
+  await db.user.create({
     data: {
       name,
+      fullName,
+      address,
+      phoneNumber,
+      bankAccount,
       email: email.toLocaleLowerCase(),
       password: hashedPassword,
       inviteCode,
@@ -57,15 +61,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
       long: coord[1],
     }
   })
-
-
   
 
-  // const verificationToken = await generateVerificationToken(email)
-
-  // await sendVerificationEmail(verificationToken.email, verificationToken.token)
-
-  
-
-  return { success: "User registed successfully please login!" };
+  return { success: "User registed successfully, please pay for a package and login!" };
 };

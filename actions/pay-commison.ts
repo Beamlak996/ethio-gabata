@@ -23,10 +23,17 @@ export const payCommission = async (
 
   if((user.commission || 0) < values.commission)  return { error: "You are paying more than owed." }
 
-  await db.user.update({
+  const iUser = await db.user.update({
     where: { id: user.id },
     data: { commission: (user.commission || 0) - values.commission  }
   })
+
+  if(iUser.commission === 0) {
+    await db.user.update({
+      where: { id: iUser.id },
+      data: { withdraw: false }
+    })
+  }
 
   return { success: "Commission paid!" }
 

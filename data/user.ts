@@ -54,6 +54,18 @@ export const getAllInvitedUsers = async (id: string) => {
   }
 };
 
+export const getAllWithdrawRequestUsers = async () => {
+  try {
+    const users = await db.user.findMany({
+      where: { withdraw: true }
+    })
+
+    return users
+  } catch (error) {
+    return null
+  }
+} 
+
 export const getTotalInvitedUsers = async (id: string) => {
   try {
     const invitedUsers = await getAllInvitedUsers(id);

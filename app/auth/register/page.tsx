@@ -2,7 +2,9 @@ import { RegisterForm } from "@/components/auth/register-form"
 
 const RegisterPage = () => {
     return (
-        <RegisterForm />
+        <div className="h-full bg-slate-50" >
+            <RegisterForm />
+        </div>
     )
 }
 

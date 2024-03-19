@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DeleteUserModal } from "../modal/delete-user-modal";
+import { WithdrawModal } from "../modal/withdraw-modal";
 
 
 
@@ -18,7 +19,9 @@ export const ModalProvider = () => {
 
   return (
     <>
+
       <DeleteUserModal />
+      <WithdrawModal />
     </>
   );
 };

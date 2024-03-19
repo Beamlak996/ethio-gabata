@@ -18,8 +18,20 @@ export const RegisterSchema = z.object({
     message: "Minimum 6 characters required",
   }),
   name: z.string().min(1, {
-    message: "Name is required",
+    message: "Username is required",
   }),
+  fullName: z.string().min(1, {
+    message: "Fullname is required"
+  }),
+  address: z.string().min(1, {
+    message: "Address is required."
+  }),
+  phoneNumber: z.coerce.number().min(10, {
+    message: "Phone number is required"
+  }),
+  bankAccount: z.coerce.number().min(1,  {
+    message: "Bank Account is reqired."
+  })
 });
 
 

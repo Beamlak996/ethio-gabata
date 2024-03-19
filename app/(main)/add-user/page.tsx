@@ -10,7 +10,7 @@ const AddUser = async () => {
   if(!user) return redirect('/')
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-slate-50">
       <Heading
         title="Add User"
         description="You can add new users using form here."

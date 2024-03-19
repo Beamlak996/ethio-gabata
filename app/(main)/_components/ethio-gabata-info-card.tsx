@@ -6,7 +6,7 @@ export const EthioGabata = () => {
       <Card>
         <CardHeader className="">
           <CardTitle className="text-lg font-medium">
-            Ethio <span className="text-emerald-500">Gabata</span>
+            Ethio <span className="text-emerald-500">ገበታ</span>
           </CardTitle>
           <CardDescription>
             Every information about ethio gabata is here.

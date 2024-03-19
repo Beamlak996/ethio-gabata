@@ -1,8 +1,7 @@
 import { currentRole, currentUser } from "@/lib/auths";
-import { Chart } from "../_components/charts";
 import { DataCard } from "../_components/data-card";
 import { UserRole } from "@prisma/client";
-import {getAllInvitedPaidUsers, getAllInvitedUsers, getInvitedPaidUsers, getTotalPaidUsers } from "@/data/user";
+import { getAllInvitedUsers, getInvitedPaidUsers, getTotalPaidUsers } from "@/data/user";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { getTotalCommisionOwed } from "@/data/package";
@@ -10,21 +9,6 @@ import HeroImage from "../../../public/ethio-gabata.jpg";
 import Image from "next/image";
 import { EthioGabata } from "../_components/ethio-gabata-info-card";
 
-
-const graphData = [
-  { name: "Jan", total: 0 },
-  { name: "Feb", total: 0 },
-  { name: "Mar", total: 4 },
-  { name: "Apr", total: 0 },
-  { name: "May", total: 0 },
-  { name: "Jun", total: 0 },
-  { name: "Jul", total: 0 },
-  { name: "Aug", total: 0 },
-  { name: "Sep", total: 0 },
-  { name: "Oct", total: 0 },
-  { name: "Nov", total: 0 },
-  { name: "Dec", total: 0 },
-];
 
 const DashboardPage = async () => {
   const userRole = await currentRole();
@@ -50,8 +34,11 @@ const DashboardPage = async () => {
   const userTotalPaidUsers = await getInvitedPaidUsers(user.id)
 
 
+
+
+
   return (
-    <div className="p-6">
+    <div className="p-6  bg-slate-50">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <DataCard
           label={`${
