@@ -1,11 +1,12 @@
 import { Heading } from "@/components/heading"
 import { StatusUserInfo } from "@/components/status-user-info";
 import { Separator } from "@/components/ui/separator";
-import { getAvailablePackages } from "@/data/package";
 import { currentRole } from "@/lib/auths";
 import { db } from "@/lib/db";
 import { UserRole } from "@prisma/client";
 import { redirect } from "next/navigation";
+
+
 
 type UserIdPageProps = {
     params: {
@@ -34,10 +35,10 @@ const UserIdPage = async ({params}: UserIdPageProps) => {
     <div className="p-6">
       <Heading
         title="Profile"
-        description="You can see user detail and change user status from here."
+        description="You can see user detail from here."
       />
       <Separator className="mt-4 mb-6" />
-      <div className="flex items-center justify-center h-full" >
+      <div className="flex items-center justify-center h-full">
         <StatusUserInfo user={currentUser} />
       </div>
     </div>

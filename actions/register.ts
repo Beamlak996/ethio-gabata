@@ -7,7 +7,7 @@ import { RegisterSchema } from "@/schemas";
 import { db } from "@/lib/db";
 import { getUserByEmail } from "@/data/user";
 
-export const register = async (values: z.infer<typeof RegisterSchema>, token: string | null) => {
+export const register = async (values: z.infer<typeof RegisterSchema>, token: string | null, coord: any) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
   let referral = null
@@ -19,11 +19,21 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
   const { name, email, password } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
+  const existingName = await db.user.findUnique({
+    where: {
+      name
+    }
+  })
+
+  if(existingName) return { error: "User name is already in use!" }
+
   const existingUser = await getUserByEmail(email)
 
   if(existingUser) {
     return { error: "Email already in use!" }
   }
+
+  
 
   const inviteCode = uuidV4()
 
@@ -42,7 +52,9 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
       email,
       password: hashedPassword,
       inviteCode,
-      referalId: referral?.id
+      referalId: referral?.id,
+      lat: coord[0],
+      long: coord[1],
     }
   })
 

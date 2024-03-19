@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UsersColumns } from "./columns";
-import { FileBarChart, FolderTree, ListCollapse, MoreHorizontal, Trash } from "lucide-react";
+import { FileBarChart, FolderTree, ListCollapse, LocateIcon, MoreHorizontal, Trash } from "lucide-react";
 import Link from "next/link";
 import { useDeleteModal } from "@/hooks/use-delete-user-modal";
 
@@ -48,6 +48,12 @@ export const CellAction: React.FC<CellActionProps> = ({data}) => {
               <DropdownMenuItem>
                 <FolderTree className="h-4 w-4 mr-2" />
                 Family Tree
+              </DropdownMenuItem>
+            </Link>
+            <Link href={`/admin/location/${data.id}`}>
+              <DropdownMenuItem>
+                <LocateIcon className="h-4 w-4 mr-2" />
+                Location
               </DropdownMenuItem>
             </Link>
             <DropdownMenuItem>

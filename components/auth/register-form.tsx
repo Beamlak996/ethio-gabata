@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "@/schemas";
@@ -17,6 +17,7 @@ import { useSearchParams } from "next/navigation";
 
 export const RegisterForm = () => {
   const searchParams = useSearchParams()
+  const [coord, setCoord] = useState([0, 0])
 
   const token = searchParams.get("invite-code");
 
@@ -24,6 +25,16 @@ export const RegisterForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
 
   const [isPending, startTransition] = useTransition();
+
+  const getMyLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setCoord([position.coords.latitude, position.coords.longitude]);
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -34,12 +45,22 @@ export const RegisterForm = () => {
     },
   });
 
+  useEffect(()=> {
+    getMyLocation()
+  }, [])
+
+
+  
+
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
 
+    getMyLocation()
+
+
     startTransition(() => {
-      register(values, token).then((data) => {
+      register(values, token, coord).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });

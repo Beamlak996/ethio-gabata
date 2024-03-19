@@ -14,7 +14,7 @@ enum UserRole {
 
 model User {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
-  name               String?
+  name               String? @unique
   email              String?   @unique
   emailVerified      DateTime?
   image              String?
@@ -27,6 +27,8 @@ model User {
   isPaid             Boolean @default(false)
   packageId          String?
   commission         Float? @default(0)
+  lat                Float?
+  long               Float?
 }
 
 model Account {
