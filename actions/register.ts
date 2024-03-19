@@ -49,7 +49,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>, token: st
   const newUser = await db.user.create({
     data: {
       name,
-      email,
+      email: email.toLocaleLowerCase(),
       password: hashedPassword,
       inviteCode,
       referalId: referral?.id,
