@@ -1,6 +1,6 @@
 import Image from "next/image";
 // import Button from "./button";
-import HeroImage from "../../../public/hero-image.jpg";
+import HeroImage from "../../../public/ethio-gabata.jpg";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -89,7 +89,7 @@ const Hero = () => {
             </div>
           </div>
         </div> */}
-        <Image src={HeroImage} alt="" className="rounded-lg" />
+        <Image src={HeroImage} alt="" className="rounded-md" />
       </div>
     </section>
   );

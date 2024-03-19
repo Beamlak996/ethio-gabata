@@ -6,6 +6,9 @@ import {getAllInvitedPaidUsers, getAllInvitedUsers, getInvitedPaidUsers, getTota
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { getTotalCommisionOwed } from "@/data/package";
+import HeroImage from "../../../public/ethio-gabata.jpg";
+import Image from "next/image";
+import { EthioGabata } from "../_components/ethio-gabata-info-card";
 
 
 const graphData = [
@@ -76,7 +79,11 @@ const DashboardPage = async () => {
           />
         )}
       </div>
-      <Chart data={graphData} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
+        <EthioGabata />
+        <Image src={HeroImage} alt="" className="rounded-md" />
+      </div>
+      {/* <Chart data={graphData} /> */}
     </div>
   );
 };
