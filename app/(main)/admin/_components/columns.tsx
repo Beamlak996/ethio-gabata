@@ -21,6 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useDeleteModal } from "@/hooks/use-delete-user-modal";
+import { CellAction } from "./cell-actions";
 
 export type UsersColumns = {
   id: string;
@@ -88,53 +89,6 @@ export const columns: ColumnDef<UsersColumns>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => {
-      const { id } = row.original;
-
-      const { open } = useDeleteModal()
-
-
-      return (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-4 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="flex flex-col w-full px-0"
-            >
-              <Link href={`/admin/users/${id}`}>
-                <DropdownMenuItem>
-                  <ListCollapse className="h-4 w-4 mr-2" />
-                  Details
-                </DropdownMenuItem>
-              </Link>
-              <Link href={`/admin/users/${id}/change-status`}>
-                <DropdownMenuItem>
-                  <FileBarChart className="h-4 w-4 mr-2" />
-                  Change Status
-                </DropdownMenuItem>
-              </Link>
-              <Link href={`/admin/family/${id}`}>
-                <DropdownMenuItem>
-                  <FolderTree className="h-4 w-4 mr-2" />
-                  Family Tree
-                </DropdownMenuItem>
-              </Link>
-              <DropdownMenuItem>
-                <div className="flex flex-row" onClick={()=>open(id)}>
-                  <Trash className="h-4 w-4 mr-2" />
-                  Delete
-                </div>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </>
-      );
-    },
+    cell: ({ row }) => <CellAction data={row.original} />
   },
 ];
