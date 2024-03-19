@@ -12,7 +12,7 @@ const Navbar = () => {
     <nav className="flex items-center justify-between max-container px-6 lg:px-20 3xl:px-0 relative z-30 py-5">
       <Logo />
 
-      <ul className="hidden h-full gap-12 lg:flex">
+      {/* <ul className="hidden h-full gap-12 lg:flex">
         {NAV_LINKS.map((link) => (
           <Link
             href={link.href}
@@ -22,9 +22,9 @@ const Navbar = () => {
             {link.label}
           </Link>
         ))}
-      </ul>
+      </ul> */}
 
-      <div className="lg:flex lg:items-center lg:justify-center hidden">
+      <div className="flex lg:items-center lg:justify-center ">
         <LoginButton>
           <Button>
             <User className="h-4 w-4 mr-2" />
@@ -32,25 +32,6 @@ const Navbar = () => {
           </Button>
         </LoginButton>
       </div>
-
-      <Menu
-        className="inline-block cursor-pointer lg:hidden"
-        width={32}
-        height={32}
-      />
-
-      {/* <Sheet>
-        <SheetTrigger asChild>
-          <Menu
-            className="inline-block cursor-pointer lg:hidden"
-            width={32}
-            height={32}
-          />
-        </SheetTrigger>
-        <SheetContent side="left" className="p-0 bg-white" >
-
-        </SheetContent>
-      </Sheet> */}
     </nav>
   );
 };
