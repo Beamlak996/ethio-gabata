@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session} >
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ModalProvider />
+          {children}
+        </body>
       </html>
     </SessionProvider>
   );

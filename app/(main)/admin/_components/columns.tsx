@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useDeleteModal } from "@/hooks/use-delete-user-modal";
 
 export type UsersColumns = {
   id: string;
@@ -90,6 +91,8 @@ export const columns: ColumnDef<UsersColumns>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
 
+      const { open } = useDeleteModal()
+
 
       return (
         <>
@@ -123,7 +126,7 @@ export const columns: ColumnDef<UsersColumns>[] = [
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuItem>
-                <div className="flex flex-row">
+                <div className="flex flex-row" onClick={()=>open(id)}>
                   <Trash className="h-4 w-4 mr-2" />
                   Delete
                 </div>
