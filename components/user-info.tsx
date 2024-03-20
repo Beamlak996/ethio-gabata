@@ -1,12 +1,8 @@
-import { ExtendedUser } from "@/next-auth";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { getTotalInvitedUsers } from "@/data/user";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { User } from "@prisma/client";
+
 
 interface UserInfoProps {
-  user: User;
+  user: any;
 }
 
 export const UserInfo = async ( {user} : UserInfoProps) => {

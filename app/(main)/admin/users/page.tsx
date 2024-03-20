@@ -23,7 +23,7 @@ const TotalUsersPage = async () => {
   })); 
 
   return (
-    <div className="p-6" >
+    <div className="p-6 bg-slate-50" >
       <DataTable data={formattedUsers} columns={columns} />
     </div>
   );

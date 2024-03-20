@@ -2,6 +2,7 @@ import { Heading } from "@/components/heading"
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { UserInfo } from "@/components/user-info";
+import { getUserById } from "@/data/user";
 import { currentRole } from "@/lib/auths";
 import { db } from "@/lib/db";
 import { Edit } from "lucide-react";
@@ -28,6 +29,8 @@ const UserIdPage = async ({params}: UserIdPageProps) => {
   }
 
 
+  const user = await getUserById(currentUser.id)
+
 
   return (
     <div>
@@ -49,7 +52,7 @@ const UserIdPage = async ({params}: UserIdPageProps) => {
 
       <Separator className="mt-4 mb-6" />
       <div className="flex items-center justify-center h-full">
-        <UserInfo user={currentUser} />
+        <UserInfo user={user} />
       </div>
     </div>
   );

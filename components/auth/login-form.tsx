@@ -40,7 +40,7 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
+      name: "",
       password: "",
     },
   });
@@ -69,16 +69,15 @@ export const LoginForm = () => {
           <div className="space-y-4">
             <FormField
               control={form.control}
-              name="email"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isPending}
                       {...field}
-                      placeholder="dawit.tsegaye@gmail.com"
-                      type="email"
+                      placeholder="dawit"
                     />
                   </FormControl>
                   <FormMessage />
@@ -100,14 +99,6 @@ export const LoginForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                  {/* <Button
-                    variant="link"
-                    size="sm"
-                    asChild
-                    className="px-0 font-normal"
-                  >
-                    <Link href="/auth/reset">Forgot password?</Link>
-                  </Button> */}
                 </FormItem>
               )}
             />

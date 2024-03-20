@@ -11,7 +11,7 @@ const UserIdFamilyPage = async ({params}: Props) => {
   const allUsers = await getAllInvitedPaidUsers(params.userId);
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-slate-50">
       <UserTree data={allUsers} />
     </div>
   );

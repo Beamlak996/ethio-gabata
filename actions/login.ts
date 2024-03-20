@@ -6,6 +6,7 @@ import { LoginSchema } from "@/schemas";
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { getUserByEmail } from "@/data/user";
+import { db } from "@/lib/db";
 
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
@@ -15,9 +16,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { error: "Invalid fields!" };
   }
 
-  const { email, password } = validatedFields.data;
+  const { name, password } = validatedFields.data;
 
-  const existingUser = await getUserByEmail(email);
+  const existingUser = await db.user.findUnique({
+    where: {
+      name
+    }
+  });
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: "Invalid credentials!" };
@@ -28,7 +33,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   try {
     await signIn("credentials", {
-      email,
+      name,
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });

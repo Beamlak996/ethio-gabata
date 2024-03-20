@@ -18,7 +18,7 @@ const PackagesPage = async () => {
   }
 
   return (
-    <div className='p-6' >
+    <div className='p-6 bg-slate-50' >
         <PackageHeader />
         <Separator className='mt-4 mb-6' />
         <PackagesList />

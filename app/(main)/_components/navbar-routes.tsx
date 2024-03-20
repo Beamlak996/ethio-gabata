@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { UserButton } from "@/components/auth/user-button";
-import LogoImage from "../../../public/ethio-gabata.jpg"
+import LogoImage from "../../../public/icon.jpg"
 import Image from "next/image";
 
 
