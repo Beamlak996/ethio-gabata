@@ -10,30 +10,14 @@ const heroText =
   "Ethio Gebeta isn't just another business partner; we're an extension of your team. We understand the unique needs of Ethiopian customers and go above and beyond to ensure their satisfaction. With our exceptional customer service and unwavering commitment to excellence, Ethio Gebeta is the clear choice for your business needs.";
 
 const Hero = () => {
-const handleClick = () => {
-  const filePath = "/../../../public/app-armeabi-v7a-release.apk"; // Adjust based on your file location
 
-  // Create a downloadable blob
-  const blob = new Blob([""], {
-    type: "application/vnd.android.package-archive",
-  });
-  const url = window.URL.createObjectURL(blob);
-
-  // Simulate a click on a hidden anchor element
-  const link = document.createElement("a");
-  link.href = url;
-  link.setAttribute("download", "app-armeabi-v7a-release.apk"); // Set the download filename
-  link.style.display = "none";
-  document.body.appendChild(link);
-  link.click();
-
-  // Cleanup after download
-  document.body.removeChild(link);
-  window.URL.revokeObjectURL(url);
+const handleDownload = () => {
+  const downloadUrl = "/app-armeabi-v7a-release.apk";
+  window.open(downloadUrl);
 };
 
   return (
-    <section className="max-container px-6 lg:px-20 3xl:px-0 flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py-20 xl:flex-row">
+    <section className="max-container px-6 lg:px-20 3xl:px-0 flex flex-col gap-20 py-6 pb-32 md:gap-28 lg:py-12 xl:flex-row">
       <div className="absolute right-0 top-0 h-screen w-screen bg-pattern-2 bg-cover bg-center md:-right-28 xl:-top-60" />
 
       <div className="relative z-20 flex flex-1 flex-col xl:w-1/2">
@@ -85,7 +69,7 @@ const handleClick = () => {
           <Link href={"/auth/register"}>
             <Button>Get Started</Button>
           </Link>
-          <Button variant="success" className="pl-4" onClick={handleClick}>
+          <Button variant="success" className="pl-4" onClick={handleDownload}>
               Get App
           </Button>
         </div>
