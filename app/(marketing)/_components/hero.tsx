@@ -17,7 +17,7 @@ const handleDownload = () => {
 };
 
   return (
-    <section className="max-container px-6 lg:px-20 3xl:px-0 flex flex-col gap-20 py-6 pb-32 md:gap-28 lg:py-12 xl:flex-row">
+    <section className="max-container px-6 lg:px-20 3xl:px-0 flex flex-col gap-20 py-6 pb-32 md:gap-20 lg:py-8 xl:flex-row">
       <div className="absolute right-0 top-0 h-screen w-screen bg-pattern-2 bg-cover bg-center md:-right-28 xl:-top-60" />
 
       <div className="relative z-20 flex flex-1 flex-col xl:w-1/2">
@@ -69,7 +69,7 @@ const handleDownload = () => {
           <Link href={"/auth/register"}>
             <Button>Get Started</Button>
           </Link>
-          <Button variant="success" className="pl-4" onClick={handleDownload}>
+          <Button variant="success" className="pl-4 w-fit" onClick={handleDownload}>
               Get App
           </Button>
         </div>
