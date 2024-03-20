@@ -73,7 +73,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="bg-slate-50 h-full">
+    <div className="bg-slate-50 h-full ">
       <CardWrapper
         headerLabel="Create an account"
         backButtonLabel="Already have an account?"
@@ -83,7 +83,7 @@ export const RegisterForm = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-4">
-              <div className="flex flex-row gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="fullName"
@@ -119,7 +119,7 @@ export const RegisterForm = () => {
                   )}
                 />
               </div>
-              <div className="flex flex-row gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -157,7 +157,7 @@ export const RegisterForm = () => {
                   )}
                 />
               </div>
-              <div className="flex flex-row gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="phoneNumber"

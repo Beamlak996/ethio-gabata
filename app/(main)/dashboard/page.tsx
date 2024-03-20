@@ -68,7 +68,9 @@ const DashboardPage = async () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
         <EthioGabata />
+        <div className="grid grid-cols-1 gap-2" >
         <Image src={HeroImage} alt="" className="rounded-md" />
+        </div>
       </div>
       {/* <Chart data={graphData} /> */}
     </div>

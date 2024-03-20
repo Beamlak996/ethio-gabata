@@ -1,6 +1,7 @@
 import Image from "next/image";
 // import Button from "./button";
 import HeroImage from "../../../public/ethio-gabata.jpg";
+import Unity from "../../../public/unity.jpg";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -89,7 +90,10 @@ const Hero = () => {
             </div>
           </div>
         </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" >
         <Image src={HeroImage} alt="" className="rounded-md" />
+        <Image src={Unity} alt="" className="rounded-md" />
+        </div>
       </div>
     </section>
   );

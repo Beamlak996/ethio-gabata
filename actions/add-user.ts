@@ -19,7 +19,7 @@ export const addUser = async (
     return { error: "Invalid fields!" };
   }
 
-  const { name, email, password } = validatedFields.data;
+  const { name, email, password, fullName, address, phoneNumber, bankAccount } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUser = await getUserByEmail(email);
@@ -45,6 +45,10 @@ export const addUser = async (
       password: hashedPassword,
       inviteCode,
       referalId: referral?.id,
+      fullName,
+      address,
+      phoneNumber,
+      bankAccount,
     },
   });
 
